@@ -1,0 +1,19 @@
+# Vivado temporary files and logs
+*.jou
+*.log
+*.str
+*.dmp
+.Xil/
+
+# Ignore the Vivado project file and workspace completely
+*.xpr
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.cache/
+vivado_workspace/
+
+# (Optional) Ignore bitstreams if you don't want them in version control
+*.bit
+*.bin

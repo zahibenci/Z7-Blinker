@@ -37,14 +37,14 @@ module debouncer #(
          sync_1 <= sync_0;
     end    
     
-    logic state = 1;
+    logic out;
     logic [19:0] counter = 0;
        
     always_ff @ (posedge clk) begin
-        if (state != sync_1) begin
+        if (out != sync_1) begin
             counter <= counter + 1'b1;
             if (counter >= cycle_count) begin
-                state <= sync_1;
+                out <= sync_1;
                 counter <= 0;
             end
         end else begin
@@ -52,5 +52,5 @@ module debouncer #(
         end        
     end
     
-    assign debounced_btn = state;
+    assign debounced_btn = out;
 endmodule

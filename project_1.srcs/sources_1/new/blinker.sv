@@ -22,7 +22,7 @@
 
 module blinker #(
     parameter clk_freq = 50_000_000,
-    parameter on_off_ms = 1000
+    parameter on_off_ms = 500
     )(
     input logic clk,
     output logic led
@@ -30,18 +30,18 @@ module blinker #(
      
     localparam wait_time = clk_freq / 1000 * on_off_ms;
     
-    logic [31:0] counter = 0;
-    logic state = 1;
+    logic [27:0] counter = 0;
+    logic out;
     
     always_ff @ (posedge clk) begin
         if (counter == 0 || counter > wait_time) begin
-            state <= ~state;
+            out <= ~out;
             counter <= wait_time;
         end else begin
             counter <= counter - 1'b1;
         end
     end
     
-    assign led = state;
+    assign led = out;
     
 endmodule

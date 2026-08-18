@@ -21,7 +21,7 @@
 
 
 module counter #(
-    parameter blink_threshold_ms = 500,
+    parameter blink_threshold_ms = 250,
     parameter clk_freq = 50_000_000
     )(
     input logic clk,
@@ -30,7 +30,7 @@ module counter #(
     );
     
     logic [30:0] counter = 0;
-    logic is_long_tmp = 0;
+    logic out;
     
     localparam wait_cycles = clk_freq / 1000 * blink_threshold_ms;
     
@@ -38,14 +38,14 @@ module counter #(
         if (btn == 0) begin
             if (counter >= wait_cycles) begin
                 counter <= counter;
-                is_long_tmp <= 1'b1;
+                out <= 1'b1;
             end else begin
                 counter <= counter + 1'b1;
-                is_long_tmp <= 0;
+                out <= 0;
             end            
         end else begin
             counter <= 0;
-            is_long_tmp <= 0;
+            out <= 0;
         end
     end
     
@@ -54,20 +54,20 @@ module counter #(
         //if (btn == 0) begin
             //if (counter >= wait_cycles) begin
                 //counter <= 0;
-                //is_long_tmp <= 1'b1;
-           // end else if (is_long_tmp == 1'b1) begin
+                //out <= 1'b1;
+           // end else if (out == 1'b1) begin
                 //counter <= 0;
-                //is_long_tmp <= 1'b1;
+                //out <= 1'b1;
             //end else begin
                 //counter <= counter + 1'b1;
-                //is_long_tmp <= 0;
+                //out <= 0;
             //end
        // end else begin 
            // counter <= 0;
-           // is_long_tmp <= 0;
+           // out <= 0;
         //end
    // end
    
-   assign is_long_press = is_long_tmp;
+   assign is_long_press = out;
    
 endmodule

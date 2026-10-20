@@ -118,12 +118,13 @@ module top(
                 is_blinking_1 <= 1'b1;
             end else begin
                 if (clean_btn_1 == 0 && is_long_1 == 0) begin
+                    is_blinking_1 <= 0;
                     if (toggle_enable_1 == 1'b1) begin
                         output_1 <= ~output_1;
                         toggle_enable_1 <= 0;
-                    end else begin
-                        output_1 <= output_1;
                     end 
+                end else if (is_blinking_1 == 1'b1) begin
+                    output_1 <= blink_1;
                 end else begin
                     toggle_enable_1 <= 1'b1;
                 end
@@ -134,12 +135,13 @@ module top(
                 is_blinking_2 <= 1'b1;
             end else begin
                 if (clean_btn_2 == 0 && is_long_2 == 0) begin
+                    is_blinking_2 <= 0;
                     if (toggle_enable_2 == 1'b1) begin
                         output_2 <= ~output_2;
                         toggle_enable_2 <= 0;
-                    end else begin
-                        output_2 <= output_2;
                     end 
+                end else if (is_blinking_2 == 1'b1) begin
+                    output_2 <= blink_2;
                 end else begin
                     toggle_enable_2 <= 1'b1;
                 end

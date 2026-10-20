@@ -40,7 +40,7 @@ module mode #(
                 counter <= 0;
                 mode <= ~mode;
             end else begin
-                counter = counter + 1'b1;
+                counter <= counter + 1'b1;
                 mode <= mode;
             end
         end else begin
